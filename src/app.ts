@@ -6,6 +6,8 @@ import express, {
 import cors from "cors";
 
 import { envVars } from "./app/config/env";
+import globalErrorHandler from "./app/middlewares/globalErrorHandler";
+import notFound from "./app/middlewares/NotFound";
 const app: Application = express();
 
 app.use(
@@ -28,5 +30,8 @@ app.get("/", (req: Request, res: Response) => {
     timeStamp: new Date().toISOString(),
   });
 });
+
+app.use(globalErrorHandler);
+app.use(notFound);
 
 export default app;
